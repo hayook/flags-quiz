@@ -4,22 +4,25 @@ const loading = document.querySelector('.loading');
 const choicesCont = document.querySelector('.choices')
 const choicesDivs = document.querySelectorAll('.choices .choice');
 const pleaseAnswer = document.querySelector('.please-answer');
-
+const endBtn = document.querySelector('.end');
 
 fetch('js/countries.json')
 .then(response => response.json())
 .then(data => ready(data))
 
-function ready(countries) {
+function ready(data) {
     startBtn.style.cursor = 'pointer';
     startBtn.innerHTML = 'Start';
     startBtn.classList.add('unset');
-    startGame(countries);
+    startGame(data) 
+    endGame()
 }
 
-function startGame(countries) {
-    startBtn.addEventListener('click', function () {
-            startBtn.innerHTML = 'Next <i class="fas fa-arrow-right"></i>'; 
+function startGame(data) {
+    startBtn.addEventListener('click', function() {
+        let countries = [...data]
+        startBtn.innerHTML = 'Next <i class="fas fa-arrow-right"></i>'; 
+        endBtn.classList.add('view')
 
         // Choose 3 Random Countries
         let choices = randomChoices(countries);
@@ -36,7 +39,6 @@ function startGame(countries) {
         
         // Click the answer
         clickToAnswer(choicesDivs, rightAnswer);
-            
     })
 } 
 
@@ -78,3 +80,11 @@ function clickToAnswer(choicesDivs, rightAnswer) {
     })
 }
 
+function endGame() {
+    endBtn.addEventListener('click', function () {
+        startBtn.innerHTML = 'Start';
+        endBtn.classList.remove('view');
+        countryFlag.src = '../images/quiz.png';
+        choicesCont.classList.remove('view');
+    })
+}

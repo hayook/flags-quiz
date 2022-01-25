@@ -46,7 +46,8 @@ h1 {
         width: 100%;
     }
 }
-.flag-quiz .generate {
+.flag-quiz .generate,
+.flag-quiz .controls .end {
     cursor: wait;
     padding: 8px 25px;
     user-select: none;
@@ -60,8 +61,15 @@ h1 {
     width: 100%;
     grid-gap: 15px;
 }
+.flag-quiz .controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px; 
+}
 .flag-quiz .choices .choice,
-.flag-quiz .generate { 
+.flag-quiz .generate,
+.flag-quiz .controls .end { 
     padding: 15px;
     cursor: pointer;
     border: 1px solid #fff; 
@@ -69,11 +77,19 @@ h1 {
     background: #000;
     color: #fff; 
 }
+.flag-quiz .controls .end {
+    display: none;
+    cursor: pointer;
+}
+.flag-quiz .controls .end.view {
+    display: block;
+}
 .flag-quiz .choices .choice.unset {
     transition: .4s;
 }
 .flag-quiz .choices .choice.unset:hover,
-.flag-quiz .generate.unset:hover {
+.flag-quiz .generate.unset:hover,
+.flag-quiz .controls .end:hover {
     background: rgba(255 255 255 / 65%);
     color: #000;
 }
@@ -89,3 +105,4 @@ h1 {
     background: #ff4646;
     color: #000;
 }
+
