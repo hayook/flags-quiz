@@ -46,13 +46,22 @@ h1 {
         width: 100%;
     }
 }
-.choices {
+.flag-quiz .generate {
+    cursor: wait;
+    padding: 8px 25px;
+    user-select: none;
+    transition: .4s; 
+}
+.flag-quiz .generate i {
+    margin-left: 8px; 
+}
+.flag-quiz .choices {
     display: none;
     width: 100%;
     grid-gap: 15px;
 }
-.choice,
-.generate { 
+.flag-quiz .choices .choice,
+.flag-quiz .generate { 
     padding: 15px;
     cursor: pointer;
     border: 1px solid #fff; 
@@ -60,32 +69,23 @@ h1 {
     background: #000;
     color: #fff; 
 }
-.flag-quiz .generate {
-    cursor: wait;
-    padding: 8px 25px;
-    user-select: none;
-    transition: .4s; 
-}
-.choice.unset {
+.flag-quiz .choices .choice.unset {
     transition: .4s;
 }
-.flag-quiz .generate i {
-    margin-left: 8px; 
-}
-.choice.unset:hover,
-.generate.unset:hover {
+.flag-quiz .choices .choice.unset:hover,
+.flag-quiz .generate.unset:hover {
     background: rgba(255 255 255 / 65%);
     color: #000;
 }
 
-.choices.view {
+.flag-quiz .choices.view {
     display: grid;
 }
-.choice.true {
+.flag-quiz .choices .choice.true {
     background: #32f432;
     color: #000; 
 }
-.choice.false {
+.flag-quiz .choices .choice.false {
     background: #ff4646;
     color: #000;
 }

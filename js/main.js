@@ -1,30 +1,56 @@
-const generateBtn = document.querySelector('button.generate'); 
+const startBtn = document.querySelector('button.generate'); 
 const countryFlag = document.querySelector('.flag-quiz img'); 
 const loading = document.querySelector('.loading'); 
 const choicesCont = document.querySelector('.choices')
 const choicesDivs = document.querySelectorAll('.choices .choice');
+const pleaseAnswer = document.querySelector('.please-answer');
 
-fetch('https://restcountries.com/v2/all')
+
+fetch('js/countries.json')
 .then(response => response.json())
-.then(data => generate(data))
+.then(data => ready(data))
 
-let playing = false;
+function ready(countries) {
+    startBtn.style.cursor = 'pointer';
+    startBtn.innerHTML = 'Start';
+    startBtn.classList.add('unset');
+    startGame(countries);
+}
 
-function generate(data) {
-    generateBtn.style.cursor = 'pointer';
-    generateBtn.innerHTML = 'Start';
-    generateBtn.classList.add('unset');
+function startGame(countries) {
+    startBtn.addEventListener('click', function () {
+            startBtn.innerHTML = 'Next <i class="fas fa-arrow-right"></i>'; 
 
-    generateBtn.addEventListener('click', function () {
-        generateBtn.innerHTML = 'Next <i class="fas fa-arrow-right"></i>'; 
-        let choices = [];
-        for (let i = 0; i < 3; i++) {
-            choices.push(data
-                .splice(Math.trunc((Math.trunc(Math.random() * data.length) + Math.trunc(Math.random() * data.length)) / 2), 1)[0])
-        }
+        // Choose 3 Random Countries
+        let choices = randomChoices(countries);
+
+        // The right Answer among the 3 choices
         let rightAnswer = choices[0];
-        console.log(`Right Answer : ${rightAnswer.name}`)
-        let rightAnswerPosition = Math.trunc(Math.random() * 3); 
+
+        // Position the choices randomly
+        choosePositions(choicesDivs, rightAnswer, choices);
+        
+        // Display the flag and the choices 
+        countryFlag.src = rightAnswer.flag;
+        choicesCont.classList.add('view');
+        
+        // Click the answer
+        clickToAnswer(choicesDivs, rightAnswer);
+            
+    })
+} 
+
+function randomChoices(countries) {
+    let choices = [];
+        for (let i = 0; i < 3; i++) {
+            choices.push(countries
+                .splice(Math.trunc((Math.trunc(Math.random() * countries.length) + Math.trunc(Math.random() * countries.length)) / 2), 1)[0])
+        }
+    return choices; 
+}
+
+function choosePositions(choicesDivs, rightAnswer, choices) {
+    let rightAnswerPosition = Math.trunc(Math.random() * 3); 
         choicesDivs[rightAnswerPosition].innerHTML = rightAnswer.name; 
         let k = 1; 
         for (let i = 0; i < 3; i++) {
@@ -33,23 +59,22 @@ function generate(data) {
                 k++; 
             }
         }
-        countryFlag.src = rightAnswer.flag;
-        choicesCont.classList.add('view');
-        
+}
 
-        choicesDivs.forEach(div => { 
+function clickToAnswer(choicesDivs, rightAnswer) {
+    choicesDivs.forEach(div => { 
 
-            div.classList.remove('true');
-            div.classList.remove('false');
-            div.classList.add('unset');
+        div.classList.remove('true');
+        div.classList.remove('false');
+        div.classList.add('unset');
 
-            div.onclick = function () {
-                choicesDivs.forEach(div => {
-                    div.classList.remove('unset');
-                    div.classList.add(div.innerHTML === rightAnswer.name ? 'true' : 'false')
-                })
-            }
-        })
+        div.onclick = function () {
+            answered = true; 
+            choicesDivs.forEach(div => {
+                div.classList.remove('unset');
+                div.classList.add(div.innerHTML === rightAnswer.name ? 'true' : 'false') 
+            })
+        }
     })
 }
 
