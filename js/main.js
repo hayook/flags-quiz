@@ -6,7 +6,7 @@ const choicesDivs = document.querySelectorAll('.choices .choice');
 const pleaseAnswer = document.querySelector('.please-answer');
 const endBtn = document.querySelector('.end');
 
-fetch('js/countries.json')
+fetch('https://restcountries.com/v2/all')
 .then(response => response.json())
 .then(data => ready(data))
 
