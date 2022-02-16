@@ -89,7 +89,6 @@ h1 {
     transition: .4s;
 }
 .flag-quiz .choices .choice.unset:hover,
-.flag-quiz .generate.unset:hover,
 .flag-quiz .controls .end:hover {
     background: rgba(255 255 255 / 65%);
     color: #000;
@@ -121,11 +120,10 @@ h1 {
   content: '';
   height:  100%;
   width: 60%;
-  border: 3px solid #fff;
+  border: 3px solid transparent;
+  border-top: 3px solid transparent;
+  border-top: 3px solid #fff;
   border-radius: 500px;
-  border-right: 3px solid transparent;
-  border-left: 3px solid transparent;
-  border-bottom: 3px solid transparent;
   position: absolute;
   animation: roll .7s ease-in-out infinite;
   top: 50%;

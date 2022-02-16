@@ -13,7 +13,6 @@ fetch('https://restcountries.com/v2/all')
 function ready(data) {
     startBtn.style.cursor = 'pointer';
     startBtn.innerHTML = 'Start';
-    startBtn.classList.add('unset');
     startGame(data) 
     endGame()
 }
