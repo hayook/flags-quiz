@@ -83,7 +83,7 @@ function endGame() {
     endBtn.addEventListener('click', function () {
         startBtn.innerHTML = 'Start';
         endBtn.classList.remove('view');
-        countryFlag.src = '../images/quiz.png';
+        countryFlag.src = 'images/quiz.png';
         choicesCont.classList.remove('view');
     })
 }
